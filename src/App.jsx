@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import './App.css';
 
@@ -42,51 +42,40 @@ You can learn more about Markdown [here](https://www.markdownguide.org/).
 ![Markdown Logo](https://cdn0.iconfinder.com/data/icons/octicons/1024/markdown-512.png)
 `;
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+const App = () => {
+  const [text, setText] = useState(initialText);
 
-    this.state = {
-      text: initialText,
-    };
+  const handleChange = function (e) {
+    const newText = e.target.value;
 
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange = function (e) {
-    const raw = e.target.value;
-    this.setState({
-      text: raw,
-    });
+    setText(newText);
   };
 
-  render() {
-    return (
-      <div id="app">
-        <h1 className="titleHeading">Markdown Previewer</h1>
-        <div id="previewer-container">
-          <div className="markdown-container">
-            <h2 className="header">Raw Markdown</h2>
-            <textarea
-              name="markdown"
-              id="editor"
-              className="text-field"
-              cols="30"
-              rows="10"
-              value={this.state.text}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="markdown-container">
-            <h2 className="header">Formatted</h2>
-            <div id="preview" className="text-field">
-              <ReactMarkdown>{this.state.text}</ReactMarkdown>
-            </div>
+  return (
+    <div id="app">
+      <h1 className="titleHeading">Markdown Previewer</h1>
+      <div id="previewer-container">
+        <div className="markdown-container">
+          <h2 className="header">Raw Markdown</h2>
+          <textarea
+            name="markdown"
+            id="editor"
+            className="text-field"
+            cols="30"
+            rows="10"
+            value={text}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="markdown-container">
+          <h2 className="header">Formatted</h2>
+          <div id="preview" className="text-field">
+            <ReactMarkdown>{text}</ReactMarkdown>
           </div>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default App;
