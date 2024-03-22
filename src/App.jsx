@@ -1,11 +1,6 @@
 import { Component } from 'react';
-import { marked } from 'marked';
+import ReactMarkdown from 'react-markdown';
 import './App.css';
-
-marked.setOptions({
-  gfm: true,
-  break: true,
-});
 
 const initialText = `
 # This is the main heading
@@ -53,7 +48,6 @@ class App extends Component {
 
     this.state = {
       text: initialText,
-      rendered: marked(initialText),
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -61,10 +55,8 @@ class App extends Component {
 
   handleChange = function (e) {
     const raw = e.target.value;
-    const rendered = marked(raw);
     this.setState({
       text: raw,
-      rendered: rendered,
     });
   };
 
@@ -87,11 +79,9 @@ class App extends Component {
           </div>
           <div className="markdown-container">
             <h2 className="header">Formatted</h2>
-            <div
-              id="preview"
-              className="text-field"
-              dangerouslySetInnerHTML={{ __html: this.state.rendered }}
-            />
+            <div id="preview" className="text-field">
+              <ReactMarkdown>{this.state.text}</ReactMarkdown>
+            </div>
           </div>
         </div>
       </div>
