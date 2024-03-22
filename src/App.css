@@ -10,6 +10,11 @@ body {
   margin: 0;
 }
 
+ul {
+  list-style-type: disc;
+  margin-left: 2rem;
+}
+
 .titleHeading {
   width: 100%;
   text-align: center;
