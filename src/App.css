@@ -10,9 +10,17 @@ body {
   margin: 0;
 }
 
-ul {
+ul > li {
   list-style-type: disc;
   margin-left: 2rem;
+}
+
+ul ul > li {
+  list-style-type: circle;
+}
+
+ul ul ul > li {
+  list-style-type: square;
 }
 
 .titleHeading {
