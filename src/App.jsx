@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import remarkBreaks from 'remark-breaks';
 import './App.css';
 
 const initialText = `
@@ -70,7 +71,7 @@ const App = () => {
         <div className="markdown-container">
           <h2 className="header">Formatted</h2>
           <div id="preview" className="text-field">
-            <ReactMarkdown>{text}</ReactMarkdown>
+            <ReactMarkdown remarkPlugins={[remarkBreaks]}>{text}</ReactMarkdown>
           </div>
         </div>
       </div>
