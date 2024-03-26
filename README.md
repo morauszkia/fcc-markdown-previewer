@@ -6,4 +6,4 @@ Project: [Build a Markdown Previewer](https://www.freecodecamp.org/learn/front-e
 Original version used marked for parsing Markdown content, but I switched to `react-markdown` for safety purposes.  
 To pass the last (optional) test: interpret carriage returns as line breaks, I used `remark-plugin`.  
 I also added syntax highlighting with `react-syntax-highlighter`.  
-Also, original version was built using server components, but I refactored to use functional components instead.
+Also, original version was built using class components, but I refactored to use functional components instead.
