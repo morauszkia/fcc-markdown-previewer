@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import ReactMarkdown from 'react-markdown';
-import remarkBreaks from 'remark-breaks';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { coy } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
 import './App.css';
+import ResultContainer from './components/ResultContainer/ResultContainer';
+import MarkdownEditor from './components/MarkdownEditor/MarkdownEditor';
 
 const initialText = `
 # This is the main heading
@@ -58,47 +57,8 @@ const App = () => {
     <div id="app">
       <h1 className="titleHeading">Markdown Previewer</h1>
       <div id="previewer-container">
-        <div className="markdown-container">
-          <h2 className="header">Raw Markdown</h2>
-          <textarea
-            name="markdown"
-            id="editor"
-            className="text-field"
-            cols="30"
-            rows="10"
-            value={text}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="markdown-container">
-          <h2 className="header">Formatted</h2>
-          <div id="preview" className="text-field">
-            <ReactMarkdown
-              remarkPlugins={[remarkBreaks]}
-              components={{
-                code({ children, className, ...rest }) {
-                  const match = /language-(\w+)/.exec(className || '');
-                  return match ? (
-                    <SyntaxHighlighter
-                      {...rest}
-                      PreTag="div"
-                      language={match[1]}
-                      style={coy}
-                    >
-                      {String(children).replace(/\n$/, '')}
-                    </SyntaxHighlighter>
-                  ) : (
-                    <code {...rest} className={className}>
-                      {children}
-                    </code>
-                  );
-                },
-              }}
-            >
-              {text}
-            </ReactMarkdown>
-          </div>
-        </div>
+        <MarkdownEditor text={text} onChange={handleChange} />
+        <ResultContainer text={text} />
       </div>
     </div>
   );
